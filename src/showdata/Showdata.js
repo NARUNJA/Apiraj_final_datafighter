@@ -10,10 +10,14 @@ export default class Showdata extends Component{
         super();
         this.state ={
             list:[],
-            timestamp:"",
             idkey:"",
-            firstname:"",
-            lastname:""
+            full_name:"",
+            sex:"",
+            divisions:"",
+            boxer_fee:"",
+            wins:"",
+            loses:"",
+            
         }
         this.handleChang = this.handleChang.bind(this);
         this.handleClicked = this.handleClicked.bind(this);
@@ -55,10 +59,13 @@ export default class Showdata extends Component{
     call=(user)=>{
         this.openModal();
         this.setState({
-            timestamp:user.timestamp,
             idkey:user.id,
-            firstname:user.firstname,
-            lastname:user.lastname
+            full_name:user.full_name,
+            sex:user.sex,
+            divisions:user.divisions,
+            boxer_fee:user.boxer_fee,
+            wins:user.wins,
+            loses:user.loses
         })
     }
     handleChang = (e) => {
@@ -67,10 +74,13 @@ export default class Showdata extends Component{
         });
         let url = `https://localhost:3000/data`;
         let data = {
-            timestamp:this.state.timestamp,
             idkey:this.state.idkey,
-            firstname:this.state.firstname,
-            lastname:this.state.lastname
+            full_name:this.state.full_name,
+            sex:this.state.sex,
+            divisions:this.state.divisions,
+            boxer_fee:this.state.boxer_fee,
+            wins:this.state.wins,
+            loses:this.state.loses
         }
         axios.put(url,data)
     }
@@ -78,17 +88,23 @@ export default class Showdata extends Component{
     handleClicked(){
         let url = `https://localhost:3000/data`;
         let data = {
-            timestamp:this.state.timestamp,
             idkey:this.state.idkey,
-            firstname:this.state.firstname,
-            lastname:this.state.lastname
+            full_name:this.state.full_name,
+            sex:this.state.sex,
+            divisions:this.state.divisions,
+            boxer_fee:this.state.boxer_fee,
+            wins:this.state.wins,
+            loses:this.state.loses
         }
         axios.put(url,data)
         this.setState({
-            timestamp:"",
             idkey:"",
-            firstname:"",
-            lastname:""
+            full_name:"",
+            sex:"",
+            divisions:"",
+            boxer_fee:"",
+            wins:"",
+            loses:"",
         });
 	this.closeModal();
         setTimeout(()=>{this.componentDidMount()},1)
@@ -98,51 +114,68 @@ export default class Showdata extends Component{
 
         return (
             <div className="App">
-                <h2 className="my-4">Users Information<br/></h2>
+                <h2 className="my-4">🥊 ข้อมูลนักมวยทั้งหมดที่มี 🥊<br/></h2>
                 <hr/>
                 <div className="container p-3 my-3 bg-dark text-white">
                     <table className="table table-dark">
                         <thead>
                             <tr>
-                            <th>TimeStamp</th>
                             <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
+                            <th>Full Name</th>
+                            <th>SEX</th>
+                            <th>Divisions</th>
+                            <th>Boxer's_fee($)</th>
+                            <th>WINS</th>
+                            <th>LOSES</th>
                             </tr>
                         </thead>
                         <tbody>
                                 {list.map((user) =>{
                                     return(
                                         <tr>
-                                            <td>{user.timestamp}</td>
                                             <td>{user.id}</td>
-                                            <td>{user.firstname}</td>
-                                            <td>{user.lastname}</td>
-                                            <td>{user.email}</td>
+                                            <td>{user.full_name}</td>
+                                            <td>{user.sex}</td>
+                                            <td>{user.divisions}</td>
+                                            <td>{user.boxer_fee}</td>
+                                            <td>{user.wins}</td>
+                                            <td>{user.loses}</td>
                                             <td><button type="button" class="btn btn-warning" onClick={()=>this.call(user)}>Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"  onClick={()=>this.onDelete(user)}>Delete</button></td>
                                             <div className="box">
                                                 <Modal visible={this.state.visible}
                                                        width="1200"
-                                                       height="600"
+                                                       height="750"
                                                        effect="fadeInUp"
                                                        onClickAway={() => this.closeModal()}
                                                 >
                                                     <form className="container" id='form'>
                                                         <div className="form-group">
-                                                            <h3><label htmlFor="id">TimeStamp: {this.state.timestamp}<br/></label></h3>
-                                                        </div>
-                                                        <div className="form-group">
                                                             <h3><label htmlFor="id">ID: {this.state.idkey}<br/></label></h3>
                                                         </div>
                                                         <div className="form-group">
-                                                            <label>firstname:</label>
-                                                            <input type="text" className="form-control" id="firstname" onChange={this.handleChang} value={this.state.firstname}/>
+                                                            <label>Full Name:</label>
+                                                            <input type="text" className="form-control" id="full_name" onChange={this.handleChang} value={this.state.full_name}/>
                                                         </div>
                                                         <div className="form-group">
-                                                            <label>lasttname:</label>
-                                                            <input type="text" className="form-control" id="lastname" onChange={this.handleChang} value={this.state.lastname}/>
+                                                            <label>SEX:</label>
+                                                            <input type="text" className="form-control" id="sex" onChange={this.handleChang} value={this.state.sex}/>
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label>Divisions:</label>
+                                                            <input type="text" className="form-control" id="divisions" onChange={this.handleChang} value={this.state.divisions}/>
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label>Boxer's_fee($):</label>
+                                                            <input type="text" className="form-control" id="boxer_fee" onChange={this.handleChang} value={this.state.boxer_fee}/>
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label>WINS:</label>
+                                                            <input type="text" className="form-control" id="wins" onChange={this.handleChang} value={this.state.wins}/>
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label>LOSES:</label>
+                                                            <input type="text" className="form-control" id="loses" onChange={this.handleChang} value={this.state.loses}/>
                                                         </div>
                                                         <button type="button" className="btn btn-primary" onClick={this.handleClicked}>Submit</button>
                                                     </form>

@@ -3,9 +3,11 @@ import FacebookLogin from "react-facebook-login";
 import ButtonShowdata from "../showdata/ButtonShowdata";
 import ButtonRegister from "../register/ButtonRegister";
 import './style.css';
+import { Link } from 'react-router-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Register from "../register/Register";
 import Showdata from "../showdata/Showdata";
+import Showdivi from "../showdivi/Showdivi";
 
 export default class Facebook extends Component {
   state = {
@@ -63,10 +65,21 @@ export default class Facebook extends Component {
  	        email: {JSON.parse(localStorage.getItem('user')).email}
           <div className="my-3"><a className="btn btn-danger" href="/" onClick={this.logoutFacebook}>Logout</a></div>
           <BrowserRouter>
-            <br /><br /><div className="btn-group btn-group-lg"><ButtonRegister /><ButtonShowdata /></div>
+          <br /><br /><div className="btn-group btn-group-lg">
+          <div className="container">
+                <Link to={'./Register'}> <button type="button" className="button button-dark button-text">Register</button> </Link>
+            </div>
+            <div className="container">
+                <Link to={'./Showdata'}> <button type="button" className="btn btn-warning">Showdata</button> </Link>
+            </div>
+            <div className="container">
+                <Link to={'./Showdivi'}> <button type="button" className="button button-dark button-text">Divisions</button> </Link>
+            </div>
+            </div>
             <Switch>
               <Route path='/register' component={Register} />
               <Route path='/showdata' component={Showdata} />
+              <Route path='/showdivi' component={Showdivi} />
             </Switch>
           </BrowserRouter>
         </div>
